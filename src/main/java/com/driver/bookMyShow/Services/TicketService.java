@@ -12,8 +12,8 @@ import com.driver.bookMyShow.Models.User;
 import com.driver.bookMyShow.Repositories.*;
 import com.driver.bookMyShow.Transformers.TicketTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.mail.SimpleMailMessage;
-// import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,8 +37,8 @@ public class TicketService {
     @Autowired
     private TheaterRepository theaterRepository;
 
-    // @Autowired
-    // private JavaMailSender mailSender;
+    @Autowired
+    private JavaMailSender mailSender;
 
     public TicketResponseDto ticketBooking(TicketEntryDto ticketEntryDto) throws RequestedSeatAreNotAvailable, UserDoesNotExists, ShowDoesNotExists{
         // check user present
@@ -85,32 +85,32 @@ public class TicketService {
         showRepository.save(show);
 
         // write mail and send to user Id
-        // sendMailToUser(user, show,seats);
+        sendMailToUser(user, show,seats);
 
 
         // build Ticket Response Dto
         return TicketTransformer.returnTicket(show, ticket);
     }
 
-    // private void sendMailToUser(User user, Show show, String seats) {
-    //     String body = "Dear"+user.getName()+",\n\nI hope this email finds you well. \n" +
-    //             "I am writing to inform you that your ticket has been successfully booked. \n" +
-    //             "We are pleased to confirm that your preferred date and time and more details have been secured.\n \n" +
-    //             "Ticket Details:\n\n" +
-    //             "Booked seat No's: "+seats+"\n" +
-    //             "Movie Name: "+show.getMovie().getMovieName()+"\n" +
-    //             "Date: "+show.getDate()+"\n" +
-    //             "Time: "+show.getTime()+"\n" +
-    //             "Location: "+show.getTheater().getAddress()+"\n\n"+
-    //             "Enjoy the show !!";
+    private void sendMailToUser(User user, Show show, String seats) {
+        String body = "Dear"+user.getName()+",\n\nI hope this email finds you well. \n" +
+                "I am writing to inform you that your ticket has been successfully booked. \n" +
+                "We are pleased to confirm that your preferred date and time and more details have been secured.\n \n" +
+                "Ticket Details:\n\n" +
+                "Booked seat No's: "+seats+"\n" +
+                "Movie Name: "+show.getMovie().getMovieName()+"\n" +
+                "Date: "+show.getDate()+"\n" +
+                "Time: "+show.getTime()+"\n" +
+                "Location: "+show.getTheater().getAddress()+"\n\n"+
+                "Enjoy the show !!";
 
-    //     SimpleMailMessage message = new SimpleMailMessage();
-    //     message.setText(body);
-    //     message.setFrom("khanking001qwerty@gmail.com");
-    //     message.setTo(user.getEmailId());
-    //     message.setSubject("Ticket Successfully Booked!");
-    //     mailSender.send(message);
-    // }
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setText(body);
+        message.setFrom("khanking001qwerty@gmail.com");
+        message.setTo(user.getEmailId());
+        message.setSubject("Ticket Successfully Booked!");
+        mailSender.send(message);
+    }
 
     private Boolean isSeatAvailable(List<ShowSeat> showSeatList, List<String> requestSeats) {
         for(ShowSeat showSeat : showSeatList) {
