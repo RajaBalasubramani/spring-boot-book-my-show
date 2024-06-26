@@ -32,6 +32,6 @@ public class Ticket {
 
     @ManyToOne
     @JoinColumn
-    private User user;
+    private AuthUser user;
 
 }

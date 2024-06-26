@@ -1,11 +1,11 @@
 package com.driver.bookMyShow.Repositories;
 
-import com.driver.bookMyShow.Models.User;
+import com.driver.bookMyShow.Models.AuthUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<AuthUser, Integer> {
 
-    User findByEmailId(String emailId);;
+    AuthUser findByEmailId(String emailId);;
 }

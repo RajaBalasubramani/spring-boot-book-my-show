@@ -8,7 +8,7 @@ import com.driver.bookMyShow.Exceptions.UserDoesNotExists;
 import com.driver.bookMyShow.Models.Show;
 import com.driver.bookMyShow.Models.ShowSeat;
 import com.driver.bookMyShow.Models.Ticket;
-import com.driver.bookMyShow.Models.User;
+import com.driver.bookMyShow.Models.AuthUser;
 import com.driver.bookMyShow.Repositories.*;
 import com.driver.bookMyShow.Transformers.TicketTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,12 +48,12 @@ public class TicketService {
         }
 
         //check show present
-        Optional<User> userOpt = userRepository.findById(ticketEntryDto.getUserId());
+        Optional<AuthUser> userOpt = userRepository.findById(ticketEntryDto.getUserId());
         if(userOpt.isEmpty()) {
             throw new UserDoesNotExists();
         }
 
-        User user = userOpt.get();
+        AuthUser user = userOpt.get();
         Show show = showOpt.get();
 
         //check requested seat available
@@ -92,7 +92,7 @@ public class TicketService {
         return TicketTransformer.returnTicket(show, ticket);
     }
 
-    private void sendMailToUser(User user, Show show, String seats) {
+    private void sendMailToUser(AuthUser user, Show show, String seats) {
         String body = "Dear"+user.getName()+",\n\nI hope this email finds you well. \n" +
                 "I am writing to inform you that your ticket has been successfully booked. \n" +
                 "We are pleased to confirm that your preferred date and time and more details have been secured.\n \n" +

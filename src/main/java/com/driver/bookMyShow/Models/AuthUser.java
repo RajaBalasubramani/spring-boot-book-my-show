@@ -5,18 +5,21 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 
 @Entity
+@Getter
+@Setter
 @Table(name = "USERS")
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class User {
+public class AuthUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +28,9 @@ public class User {
     @Column(nullable = false)
     private String name;
 
-    private Integer age;
+    private LocalDate dob;
+
+    private String password;
 
     private String address;
 
@@ -39,4 +44,6 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Ticket> ticketList = new ArrayList<>();
+
+    private String[] roles;
 }

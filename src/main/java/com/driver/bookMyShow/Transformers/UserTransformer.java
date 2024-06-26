@@ -1,32 +1,31 @@
-package com.driver.bookMyShow.Transformers;
+// package com.driver.bookMyShow.Transformers;
 
-import com.driver.bookMyShow.Dtos.RequestDtos.UserEntryDto;
-import com.driver.bookMyShow.Dtos.ResponseDtos.ReturnUserDto;
-import com.driver.bookMyShow.Models.User;
+// import com.driver.bookMyShow.Dtos.RequestDtos.UserEntryDto;
+// import com.driver.bookMyShow.Dtos.ResponseDtos.ReturnUserDto;
+// import com.driver.bookMyShow.Models.AuthUser;
 
-public class UserTransformer {
+// public class UserTransformer {
 
-    public static User userDtoToUser(UserEntryDto userEntryDto) {
-        User user = User.builder()
-                .name(userEntryDto.getName())
-                .age(userEntryDto.getAge())
-                .address(userEntryDto.getAddress())
-                .gender(userEntryDto.getGender())
-                .mobileNo(userEntryDto.getMobileNo())
-                .emailId(userEntryDto.getEmailId())
-                .build();
+//     public static AuthUser userDtoToUser(UserEntryDto userEntryDto) {
+//         AuthUser user = AuthUser.builder()
+//                 .name(userEntryDto.getName())
+//                 .dob(userEntryDto.getDob())
+//                 .address(userEntryDto.getAddress())
+//                 .gender(userEntryDto.getGender())
+//                 .mobileNo(userEntryDto.getMobileNo())
+//                 .emailId(userEntryDto.getEmailId())
+//                 .build();
 
-        return user;
-    }
+//         return user;
+//     }
 
-    public static ReturnUserDto userToUserDto(User user) {
-        ReturnUserDto userDto = ReturnUserDto.builder()
-                .name(user.getName())
-                .age(user.getAge())
-                .address(user.getAddress())
-                .gender(user.getGender())
-                .build();
+//     public static ReturnUserDto userToUserDto(AuthUser user) {
+//         ReturnUserDto userDto = ReturnUserDto.builder()
+//                 .name(user.getName())
+//                 .address(user.getAddress())
+//                 .gender(user.getGender())
+//                 .build();
 
-        return userDto;
-    }
-}
+//         return userDto;
+//     }
+// }
